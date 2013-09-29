@@ -7,10 +7,14 @@ angular.module('nodedataApp', [])
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-        .when('/hello',{
-            templateUrl: 'views/hello.html',
-            controller: 'HelloCtrl'
+        .when('/links',{
+            templateUrl: 'views/links.html',
+            controller: 'LinksCtrl'
         })
+      .when('/tags', {
+        templateUrl: 'views/tags.html',
+        controller: 'TagsCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
