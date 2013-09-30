@@ -17,13 +17,20 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 
+
+
 // development only
 if ('production' == app.get('env')) {
     app.use(express.static(path.join(__dirname, 'dist')));
 } else {
+    console.log("kkkk");
     app.use(express.static(path.join(__dirname, 'app')));
     app.use(express.errorHandler());
 }
+
+//node route
+app.use('/api/link', require('./routes/link').middleware);
+
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log("Express server listening on port %d in %s mode", app.get('port'), app.get('env'));
