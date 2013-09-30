@@ -23,7 +23,6 @@ app.use(app.router);
 if ('production' == app.get('env')) {
     app.use(express.static(path.join(__dirname, 'dist')));
 } else {
-    console.log("kkkk");
     app.use(express.static(path.join(__dirname, 'app')));
     app.use(express.errorHandler());
 }
