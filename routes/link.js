@@ -11,7 +11,7 @@ var router = new express.Router();
 
 var LinkSchema= new Schema({
     name: { type: String, required: true },
-    phone: { type: Number },
+    phone: { type: Number }
 });
 
 var LinkModel = mongoose.model('Links', LinkSchema);
@@ -21,7 +21,7 @@ var LinkModel = mongoose.model('Links', LinkSchema);
 //router.get('/bar', function(req, res, next) {  res.send('Hello World! ++jj\n'); });
 
 router.get('/',function (req, res){
-    return LinkModel.find(function (err, links) {mongoose.connect('mongodb://localhost/contact');◊
+    return LinkModel.find(function (err, links) {mongoose.connect('mongodb://localhost/contact');
         if (!err) {
             res.jsonp(links);
         } else {
