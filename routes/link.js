@@ -21,7 +21,7 @@ var LinkModel = mongoose.model('Links', LinkSchema);
 //router.get('/bar', function(req, res, next) {  res.send('Hello World! ++jj\n'); });
 
 router.get('/',function (req, res){
-    return LinkModel.find(function (err, links) {mongoose.connect('mongodb://localhost/contact');
+    return LinkModel.find(function (err, links) {
         if (!err) {
             res.jsonp(links);
         } else {
@@ -39,6 +39,55 @@ router.get('/:id', function (req, res) {
         }
     });
 });
+
+
+
+router.post("/",function (req, res) {
+    var link;
+    link = new LinkModel({
+        name: req.body.name,
+        phone: req.body.phone
+    });
+    link.save(function (err) {
+        if (!err) {
+            console.log("created");
+        } else {
+            console.log(err);
+        }
+    });
+
+    return res.send(link);
+});
+
+
+router.put('/',function (req, res) {
+    return ContactModel.findById(req.params.id, function (err, contact) {
+        contact.name = req.body.name;
+        contact.phone = req.body.phone;
+        contact.save(function (err) {
+            if (!err) {
+                console.log("updated");
+            } else {
+                console.log(err);
+            }
+            res.send(contact);
+        });
+    });
+});
+
+router.delete('/',function (req, res){
+    return ContactModel.findById(req.params.id, function (err, contact) {
+        return contact.remove(function (err) {
+            if (!err) {
+                console.log("removed");
+                return res.send('');
+            } else {
+                console.log(err);
+            }
+        });
+    });
+});
+
 
 
 // at the end we export this router as a single unit
