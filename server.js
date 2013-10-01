@@ -29,6 +29,7 @@ if ('production' == app.get('env')) {
 
 //node route
 app.use('/api/link', require('./routes/link').middleware);
+app.use('/api/tag', require('./routes/tag').middleware);
 
 
 http.createServer(app).listen(app.get('port'), function () {
