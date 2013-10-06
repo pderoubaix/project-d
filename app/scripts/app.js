@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('nodedataApp', [])
+angular.module('nodedataApp', ['capitaliseFilters'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

@@ -1,12 +1,30 @@
-
-    <form novalidate class="simple-form">
-        Name: <input type="text" ng-model="user.name" /><br />
-        E-mail: <input type="email" ng-model="user.email" /><br />
-        Gender: <input type="radio" ng-model="user.gender" value="male" />male
-        <input type="radio" ng-model="user.gender" value="female" />female<br />
-        <button ng-click="reset()">RESET</button>
-        <button ng-click="update(user)">SAVE</button>
-    </form>
-    <pre>form = {{user | json}}</pre>
-    <pre>master = {{master | json}}</pre>
-
+<body ng-controller="ListController">
+<h1>Contact manager</h1>
+<ul class="inline">
+    <li>You have {{contacts.length}} contacts.</li>
+    <li>
+        <div class="input-prepend">
+            <span class="add-on"><i class="icon-search"></i></span>
+            <input class="span2" id="inputIcon" type="text" placeholder="Search..." ng-model="query">
+        </div>
+    </li>
+    <li>
+        <p>Sorted by: {{columnSort.sortColumn}}</p>
+    </li>
+</ul>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th ng-repeat="header in headers">
+            <a ng-click="columnSort.sortColumn=headers[$index];columnSort.reverse=!columnSort.reverse">{{ headers[$index] | capitalise }}</a>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="contact in contacts | orderBy:columnSort.sortColumn:columnSort.reverse | filter: query">
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.phone }} </td>
+    </tr>
+    </tbody>
+</table>
+</body>
