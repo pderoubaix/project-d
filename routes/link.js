@@ -1,5 +1,3 @@
-var express = require('express');
-var mongoose = require('mongoose');
 
 //mongodb connect & schema
 mongoose.connect('mongodb://localhost/contact');

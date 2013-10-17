@@ -2,36 +2,43 @@
  * Module dependencies.
  */
 
-var express = require('express')
-    , http = require('http')
-    , path = require('path');
+var express = require('express'),
+     http = require('http'),
+     api = require('./server/controler/api'),
+    path = require('path');
 
-var app = express();
+
+
+var server = express();
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+server.set('port', process.env.PORT || 3000);
 
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.bodyParser());
-app.use(express.methodOverride());
-app.use(app.router);
+server.use(express.favicon());
+server.use(express.logger('dev'));
+server.use(express.bodyParser());
+server.use(express.methodOverride());
+server.use(server.router);
 
 
 
 // development only
-if ('production' == app.get('env')) {
-    app.use(express.static(path.join(__dirname, 'dist')));
+if ('production' == server.get('env')) {
+    server.use(express.static(path.join(__dirname, 'dist')));
 } else {
-    app.use(express.static(path.join(__dirname, 'app')));
-    app.use(express.errorHandler());
+    server.use(express.static(path.join(__dirname, 'app')));
+    server.use(express.errorHandler());
 }
 
 //node route
-app.use('/api/link', require('./routes/link').middleware);
-app.use('/api/tag', require('./routes/tag').middleware);
+server.get('/api/link',api.requestHandler(api.links.browse));
+//server.get('/api/v0.1/posts', authAPI, disableCachedResult, );
+//server.post('/api/v0.1/posts', authAPI, disableCachedResult, api.requestHandler(api.posts.add));
+//server.get('/api/v0.1/posts/:id', authAPI, disableCachedResult, api.requestHandler(api.posts.read));
+//server.put('/api/v0.1/posts/:id', authAPI, disableCachedResult, api.requestHandler(api.posts.edit));
+//server.del('/api/v0.1/posts/:id', authAPI, disableCachedResult, api.requestHandler(api.posts.destroy));
 
 
-http.createServer(app).listen(app.get('port'), function () {
-    console.log("Express server listening on port %d in %s mode", app.get('port'), app.get('env'));
+http.createServer(server).listen(server.get('port'), function () {
+    console.log("Express server listening on port %d in %s mode", server.get('port'), server.get('env'));
 });
