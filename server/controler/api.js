@@ -43,7 +43,7 @@ requestHandler = function (apiMethod) {
             };
 
         return apiMethod.call(apiContext, options).then(function (result) {
-            res.json(result || {});
+            res.jsonp(result || {});
         }, function (error) {
             error = {error: _.isString(error) ? error : (_.isObject(error) ? error.message : 'Unknown API Error')};
             res.json(400, error);

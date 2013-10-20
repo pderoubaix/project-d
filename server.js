@@ -5,11 +5,27 @@
 var express = require('express'),
      http = require('http'),
      api = require('./server/controler/api'),
+    security = require('./server/lib/security'),
+    user = require('./server/controler/user'),
     path = require('path');
 
 
 
 var server = express();
+
+// auth
+
+
+//middleware
+function authAPI(req, res, next) {
+    if (!req.session.user) {
+        // TODO: standardize error format/codes/messages
+        res.json(401, { error: 'Please sign in' });
+        return;
+    }
+
+    next();
+}
 
 // all environments
 server.set('port', process.env.PORT || 3000);
@@ -18,6 +34,8 @@ server.use(express.favicon());
 server.use(express.logger('dev'));
 server.use(express.bodyParser());
 server.use(express.methodOverride());
+server.use(express.cookieParser());
+server.use(express.cookieSession({ secret: 'tobo!', cookie: { maxAge: 60 * 60 * 1000 }}));
 server.use(server.router);
 
 
@@ -31,13 +49,18 @@ if ('production' == server.get('env')) {
 }
 
 //node route
-server.get('/api/link',api.requestHandler(api.links.browse));
+server.get('/api/link',authAPI,api.requestHandler(api.links.browse));
 //server.get('/api/v0.1/posts', authAPI, disableCachedResult, );
 //server.post('/api/v0.1/posts', authAPI, disableCachedResult, api.requestHandler(api.posts.add));
 //server.get('/api/v0.1/posts/:id', authAPI, disableCachedResult, api.requestHandler(api.posts.read));
 //server.put('/api/v0.1/posts/:id', authAPI, disableCachedResult, api.requestHandler(api.posts.edit));
 //server.del('/api/v0.1/posts/:id', authAPI, disableCachedResult, api.requestHandler(api.posts.destroy));
 
+//security route
+//server.get('/islogged',security.auth.islogged);
+
+//user
+server.get('/user/add',user.user.add);
 
 http.createServer(server).listen(server.get('port'), function () {
     console.log("Express server listening on port %d in %s mode", server.get('port'), server.get('env'));

@@ -4,17 +4,21 @@ angular.module('nodedataApp', ['capitaliseFilters'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
+        templateUrl: 'views/frontend/main.html',
         controller: 'MainCtrl'
       })
         .when('/links',{
-            templateUrl: 'views/links.html',
+            templateUrl: 'views/frontend/links.html',
             controller: 'LinksCtrl'
         })
       .when('/tags', {
-        templateUrl: 'views/tags.html',
+        templateUrl: 'views/frontend/tags.html',
         controller: 'TagsCtrl'
       })
+      .when('/admin', {
+            templateUrl: 'views/backend/admin.html',
+            controller: 'MainCtrl'
+        })
       .otherwise({
         redirectTo: '/'
       });
