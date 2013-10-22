@@ -12,16 +12,21 @@ mongoose.createConnection(connStr, function(err) {
 
 
 // create a user a new user
-var testUser = new User({
-    username: 'jmar7757',
-    password: 'Password'
-});
+
 
 user = {
 
-    add : function add(option) {
-        testUser.save(function(err) {
-            if (err) {
+    add : function add (req, res){
+        console.log(req.body.username);
+        var InsertUser = new User({
+            username: req.body.username,
+            password: req.body.password
+        });
+
+        InsertUser.save(function(err) {
+            if (!err) {
+                res.jsonp('{saved}');
+            } else {
                 throw err;
             }
             console.log('saved');

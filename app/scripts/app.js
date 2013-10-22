@@ -15,9 +15,9 @@ angular.module('nodedataApp', ['capitaliseFilters'])
         templateUrl: 'views/frontend/tags.html',
         controller: 'TagsCtrl'
       })
-      .when('/admin', {
-            templateUrl: 'views/backend/admin.html',
-            controller: 'MainCtrl'
+      .when('/register', {
+            templateUrl: 'views/backend/register.html',
+            controller: 'RegisterCtrl'
         })
       .otherwise({
         redirectTo: '/'

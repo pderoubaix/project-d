@@ -60,7 +60,7 @@ server.get('/api/link',authAPI,api.requestHandler(api.links.browse));
 //server.get('/islogged',security.auth.islogged);
 
 //user
-server.get('/user/add',user.user.add);
+server.post('/user/add',user.user.add);
 
 http.createServer(server).listen(server.get('port'), function () {
     console.log("Express server listening on port %d in %s mode", server.get('port'), server.get('env'));

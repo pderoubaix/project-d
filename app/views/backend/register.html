@@ -1,0 +1,26 @@
+
+    <form ng-controller="RegisterCtrl" ng-submit="createUser()">
+
+++
+ <div class="container">
+    <div class="ui middle aligned  two column grid">
+        <h1>Register Now</h1>
+
+        <div class="column">
+            <div class="ui fluid form segment">
+
+                <div class="field">
+                    <label>Username</label>
+                    <input placeholder="username" type="text" ng-model="user.username">
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <input type="password" ng-model="user.password">
+                </div>
+
+                <button  class="btn btn-primary ui blue submit button">Register</button>
+            </div>
+        </div>
+    </div>
+</div>
+        </form>
