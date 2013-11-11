@@ -2,7 +2,10 @@
   "name": "nodedata",
   "version": "0.0.0",
   "dependencies": {
-    "express": "~3.4.0"
+    "express": "~3.4.0",
+    "winston": "~0.7.2",
+    "moment": "~2.4.0",
+    "nconf": "~0.6.8"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

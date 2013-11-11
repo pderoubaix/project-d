@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
-    User = require('../lib/user');
-
+    User = require('../lib/user'),
+    moment = require('moment');
 
 var connStr = 'mongodb://localhost/mongoose-bcrypt-test';
 mongoose.createConnection(connStr, function(err) {
@@ -14,16 +14,19 @@ mongoose.createConnection(connStr, function(err) {
 // create a user a new user
 
 
+
+
 user = {
 
     add : function add (req, res){
-        console.log(req.body.username);
-        var InsertUser = new User({
+
+        var user = new User({
             username: req.body.username,
-            password: req.body.password
+            password: req.body.password,
+            createdAt: moment()
         });
 
-        InsertUser.save(function(err) {
+        user.save(function(err) {
             if (!err) {
                 res.jsonp('{saved}');
             } else {
@@ -31,8 +34,14 @@ user = {
             }
             console.log('saved');
         })
-    }
+    },
 
+    browse : function browse (req,res) {
+
+
+
+
+    }
 
 }
 

@@ -7,7 +7,9 @@ var express = require('express'),
      api = require('./server/controler/api'),
     security = require('./server/lib/security'),
     user = require('./server/controler/user'),
-    path = require('path');
+    path = require('path'),
+    nconf = require('nconf'),
+    fs = require('fs')
 
 
 
