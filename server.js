@@ -9,8 +9,8 @@ var express = require('express'),
     user = require('./server/controler/user'),
     path = require('path'),
     nconf = require('nconf'),
-    fs = require('fs'),
-    winston = require('winston')
+    fs = require('fs')
+
 
 
 
@@ -23,12 +23,7 @@ nconf.argv()
     .env()
     .file({ file: './server/'+ process.env.NODE_ENV + '_config.json'});
 
-var logger = new (winston.Logger)({
-    transports: [
-        new (winston.transports.Console)(),
-        new (winston.transports.File)({ filename: './logs/app.log' })
-    ]
-});
+
 
 // auth
 
