@@ -5,7 +5,8 @@
     "express": "~3.4.0",
     "winston": "~0.7.2",
     "moment": "~2.4.0",
-    "nconf": "~0.6.8"
+    "nconf": "~0.6.8",
+    "bcrypt": "~0.7.4"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

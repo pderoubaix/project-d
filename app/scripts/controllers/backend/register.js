@@ -7,8 +7,7 @@ angular.module('nodedataApp')
 
             $http.post('/user/add', $scope.user).
                 success(function(data) {
-                    console.log('redirect');
-                    $location.path('/');
+                    $location.path('/#/');
                 });
         };
     });
